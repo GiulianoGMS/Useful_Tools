@@ -1,0 +1,1 @@
+ALTER SESSION SET current_schema = CONSINCO;
