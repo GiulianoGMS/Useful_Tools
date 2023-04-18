@@ -1,0 +1,3 @@
+ -- Seleciona apenas o que for caractere numérico
+ 
+ REGEXP_LIKE(SUBSTR(REGEXP_SUBSTR(X.OBSERVACAO, ':[^:](\S*)'),3,10), '^[[:digit:]]+$')
