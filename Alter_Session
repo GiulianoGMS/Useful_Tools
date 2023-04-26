@@ -1,1 +1,3 @@
+-- Altera conexão da janela e não precisa incluir 'CONSINCO' antes dos nomes das tabelas
+
 ALTER SESSION SET current_schema = CONSINCO;
