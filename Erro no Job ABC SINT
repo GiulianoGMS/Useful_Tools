@@ -1,0 +1,22 @@
+-- Erro no JOB CONSINCO.SM_GERA_ABC_SINTETICA
+
+SELECT X.SEQNF, SEQPRODUTO, INDPROMOCAO
+  FROM CONSINCO.MFL_DFITEM X 
+  
+  WHERE 1=1
+    AND INDPROMOCAO = 'N'
+    AND EXISTS (SELECT 1 FROM CONSINCO.MFL_DFITEM Z 
+                 WHERE 1=1
+                   AND Z.SEQNF       = X.SEQNF 
+                   AND Z.NROEMPRESA  = X.NROEMPRESA 
+                   AND Z.SEQPRODUTO  = X.SEQPRODUTO 
+                   AND Z.INDPROMOCAO = 'S'
+                   AND Z.DTAMOVTOITEM BETWEEN TRUNC(SYSDATE) - 10 AND TRUNC(SYSDATE) -1)
+                   
+    AND X.DTAMOVTOITEM BETWEEN TRUNC(SYSDATE) - 10 AND TRUNC(SYSDATE) -1  
+  ORDER BY 1,2
+  
+  begin
+  consinco.sp_mbi_cargaabcvdasintetica(null, trunc(sysdate)-10, trunc(sysdate)-1);
+  end;
+ 
