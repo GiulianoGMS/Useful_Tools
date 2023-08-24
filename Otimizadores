@@ -1,0 +1,11 @@
+/*+OPTIMIZER_FEATURES_ENABLE('11.2.0.4')*/
+
+/*+ PARALLEL(n) */: Instrui o Oracle a executar a consulta em paralelo usando n processos. Isso pode ser útil para consultas que podem ser divididas em partes que podem ser processadas em paralelo. Lembre-se de que o uso excessivo de paralelismo pode sobrecarregar o sistema e reduzir o desempenho.
+
+/*+ INDEX(table_name index_name) */: Instrui o Oracle a usar um índice específico para a consulta. Isso pode ser útil quando você sabe que um índice específico é mais adequado para a consulta em questão.
+
+/*+ MATERIALIZE */: Instrui o Oracle a criar uma tabela temporária (materialized table) para armazenar os resultados intermediários da consulta. Isso pode ser útil quando você deseja evitar operações complexas repetidas.
+
+/*+ NOCACHE */: Instrui o Oracle a evitar o armazenamento em cache dos resultados da consulta. Pode ser útil para consultas que não são frequentemente repetidas e não precisam ser mantidas em cache.
+
+/*+ ORDERED */: Instrui o Oracle a seguir a ordem das tabelas nas cláusulas FROM e JOINs. Isso pode ser útil quando você sabe que a ordem das tabelas afeta o desempenho.
