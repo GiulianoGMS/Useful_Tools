@@ -1,4 +1,4 @@
-DELETE FROM ADMCIPOLLA.BKP_BASE49;
+DELETE FROM ADMCIPOLLA.BKP_BASE49 WHERE 1=1;
 
 COMMIT;
 -- Replace para retirar caracteres inválidos (Espaços)
