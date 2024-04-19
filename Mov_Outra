@@ -1,0 +1,11 @@
+-- Alterar o trecho nas views:
+
+CONSINCO.mrlv_especimpgz_movoutra
+CONSINCO.mrlv_especimpgz_finalizador
+CONSINCO.mrlv_especimpgz_movoutra_geral
+
+       -- Alterado em 19/04/2024 por Giuliano - Solic Alan - Corrigir duplicidade na PDV_DOCTO
+       /*decode(to_number(substr (a.linha, 393, 6)),
+              0, to_number(substr (a.linha, 1, 6)),
+              to_number(substr(a.linha, 393, 6))) NroDocumento,*/
+       to_number(substr (a.linha, 1, 6)) NroDocumento,
