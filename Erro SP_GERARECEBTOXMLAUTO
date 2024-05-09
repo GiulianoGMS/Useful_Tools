@@ -1,0 +1,17 @@
+BEGIN
+-- Faz output da empresa com erro
+  --- Processa os XML recebidos.-- Migrado todas lojas em 09/02/2022 por Cipolla - Solicitação Juan
+FOR X IN (
+                 SELECT A.NROEMPRESA
+                 FROM DWNAGT_DADOSEMPRESA@BI A
+                 WHERE A.TIPO in ('LOJA','CD')
+                 AND A.NROEMPRESA NOT IN (502,504,505)
+                 order by 1
+                 )                 
+               LOOP
+      CONSINCO.SP_GERARECEBTOXMLAUTO_NAG(X.NROEMPRESA);
+      
+      COMMIT;
+      
+      END LOOP;
+      END;
