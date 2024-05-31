@@ -52,3 +52,58 @@ vnImpostoSubtraiICMS = 0 + (((1,65 + 7,6) * 18) / 100) = 1,665
  
 
 (( 24,98 - ( 24,98 * (27,25 - 1,665)  + 0 + 0 + 0 )/ 100 ) - ( ( 11,456106 - 11,456106 * 0 / 100 ) ) ) / 24,98 * 100) = 28,5539
+
+--
+
+/*
+Tela de simulação - dlgSimulaCustoCompraFornec - Família 77356
+
+( dfnPrecoSug - ( dfnPrecoSug * (dfnPvTotalImpostos - vnImpostoSubtraiICMS)  + dfnPvDespesaOperacional + dfnPvComissaoNormal + dfnPvPerFatorST )
+/ 100 ) - (( dfnVdaVlrCustoLiquido - dfnVdaVlrCustoLiquido  * dfnPercDescFormPreco / 100 ))) / dfnPrecoSug * 100 
+
+dfnPrecoSug = Preço sugerido = 24,98
+dfnPvTotalImpostos = % Total impostos = 27,25
+dfnPvDespesaOperacional = Despesa operacional = 0
+dfnPvComissaoNormal = Comissão normal = 0
+dfnPvPerFatorST = Fator ST = 0
+dfnVdaVlrCustoLiquido = Custo líquido = 11,456106
+dfnPercDescFormPreco = % Desconto p/ formação de preço = 0
+ 
+vnImpostoSubtraiICMS = vnImpostoSubtraiICMS + (((dfnPvPis + dfnPvCofins) * dfnPvICMS) / 100)
+dfnPvPis = Débito PIS
+dfnPvCofins = Débito COFINS
+dfnPvICMS = Débito ICMS
+*/
+/*CONSINCO.FCALCULAPIC
+CONSINCO.FCUSTOLIQUIDOBASEZERO
+CONSINCO.FPRECOSUGERIDOPIC
+*/
+
+SELECT NAME, Text FROM ALL_SOURCE B WHERE UPPER(TEXT) LIKE '%VNIMPOSTOSUBTRAIICMS%'
+
+SELECT 'SUGERIDO' TIPO,
+       ROUND(((108.99 -
+             (108.99 * (34.25 - ((7.60 + 1.65) * 25 / 100)) / 100 + 0 + 0 + 0)) -
+             (50.8116 - 50.8116 * 0 / 100)) / 108.99 * 100,
+             4) MARGEM
+  FROM DUAL
+
+UNION ALL
+
+SELECT 'PRATICADO' TIPO,
+       ROUND(((108.99 -
+             (108.99 * (34.25 - ((7.60 + 1.65) * 0 / 100)) + 0 + 0 + 0) / 100) -
+             ((50.8116 - 50.8116 * 0 / 100))) / 108.99 * 100,
+             4) MARGEM
+
+  FROM DUAL
+
+UNION ALL
+
+SELECT 'CONCORRENTE' TIPO,
+       ROUND(((129.90 -
+             (129.90 * (34.25 - ((7.60 + 1.65) * 0 / 100)) + 0 + 0 + 0) / 100) -
+             ((50.8116 - 50.8116 * 0 / 100))) / 129.90 * 100,
+             4) MARGEM
+
+  FROM DUAL
