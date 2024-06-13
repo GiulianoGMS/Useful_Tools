@@ -1,6 +1,6 @@
 BEGIN
--- Faz output da empresa com erro
-  --- Processa os XML recebidos.-- Migrado todas lojas em 09/02/2022 por Cipolla - Solicitação Juan
+-- Trata a empresa com erro dentro da pkg e faz output
+-- Depois que rodar este pode executar o job normal
 FOR X IN (
                  SELECT A.NROEMPRESA
                  FROM DWNAGT_DADOSEMPRESA@BI A
@@ -15,3 +15,5 @@ FOR X IN (
       
       END LOOP;
       END;
+      
+      
