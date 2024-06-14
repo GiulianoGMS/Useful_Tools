@@ -1,6 +1,6 @@
 -- Importacao Dados SuperTroco
 
-SELECT * FROM ALL_DIRECTORIES WHERE DIRECTORY_NAME = 'SUPERTROCO'; -- checando diretorio
+SELECT * FROM ALL_DIRECTORIES WHERE DIRECTORY_NAME = 'SUPERTROCO';
 
 GRANT READ, WRITE ON DIRECTORY SUPERTROCO TO ADMGIULIANO;
 
@@ -67,12 +67,13 @@ SELECT TO_DATE(TO_DATE("DATA",'YYYY/MM/DD'), 'DD/MM/YY') DATA,
        TO_NUMBER("NSU ST")                            NSU_ST,
        TO_NUMBER("NSU PDV")                           NSU_PDV,
        TO_NUMBER(REPLACE(VALOR,',','.'))              VALOR,
-       TO_NUMBER(INSTR(LOJA, 'LJ') + 2)               LOJA,
+       TO_NUMBER(SUBSTR(LOJA,INSTR(LOJA, 'LJ')+2,2))  LOJA,
        TO_NUMBER(CNPJ)                                CNPJ                
 
  FROM  CONSINCO.NAGT_SUPERTROCO_SALES_IMP X
  
  WHERE 1=1;
+
 
 -- Tabela Final
 
