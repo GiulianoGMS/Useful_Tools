@@ -221,7 +221,7 @@ DECLARE
   buffer    VARCHAR2(32767);
   vDta VARCHAR2(50);
 BEGIN
-  vDta := REPLACE(TO_CHAR(SYSDATE, 'DD/MM/YYYY'),'/','');
+  vDta := REPLACE(TO_CHAR(SYSDATE -1, 'DD/MM/YYYY'),'/','');
   -- Abrir o arquivo original para leitura
   src_file := UTL_FILE.FOPEN('SUPERTROCO', 'salesasync.csv', 'R');
 
