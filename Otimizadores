@@ -1,4 +1,5 @@
 /*+OPTIMIZER_FEATURES_ENABLE('11.2.0.4')*/
+/*+OPTIMIZER_FEATURES_ENABLE('19.1.0')*/
 
 /*+ PARALLEL(n) */: Instrui o Oracle a executar a consulta em paralelo usando n processos. Isso pode ser útil para consultas que podem ser divididas em partes que podem ser processadas em paralelo. Lembre-se de que o uso excessivo de paralelismo pode sobrecarregar o sistema e reduzir o desempenho.
 
