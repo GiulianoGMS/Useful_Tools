@@ -42,12 +42,30 @@ INSERT INTO MLF_AUXNFITEM (...)
 
 -- Criei uma tabela paralela com todos os campos da MLF_AUXNFITEM como VARCHAR2(2000) para fazer o Insert sem erro 
 -- e descobrir qual a coluna posteriormente
--- Então, alterei na linha 695 e deixei o Insert assim:
+-- Basicamente:
+
+CREATE TABLE MLF_AUXNFITEM_TESTE AS 
+  SELECT * FROM MLF_AUXNFITEM WHERE ROWNUM = 1;
+
+-- Depois, rodei um Begin para alterar todas as colunas para VARCHAR2(2000):
+
+BEGIN
+    FOR rec IN (
+        SELECT column_name
+        FROM user_tab_columns
+        WHERE table_name = 'MLF_AUXNFITEM_TESTE'
+        ORDER BY column_name
+    ) LOOP
+        EXECUTE IMMEDIATE 'ALTER TABLE MLF_AUXNFITEM_TESTE MODIFY ' || rec.column_name || ' VARCHAR2(2000)';
+    END LOOP;
+END;
+  
+-- Então, alterei na linha 695 e deixei o Insert assim com a nova tabela:
 
 INSERT INTO MLF_AUXNFITEM_TESTE (...)
 
 -- Compilado, executei novamente a chamada da Proc com a minha tabela com VARCHAR2(2000) e executou normalmente
--- Com os dados na tabela paralela, criei um bloco para fazer insert (a partir da paralela) na tabela original por SEQAUXNFITEM (como um rowid) para descobrir qual a linha com problema
+-- Com os dados na tabela paralela, criei um bloco para fazer insert (a partir da paralela) na tabela original por SEQAUXNFITEM (como um rownumber) para descobrir qual a linha com problema
 
 BEGIN
 
