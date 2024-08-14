@@ -3,3 +3,7 @@
  REGEXP_LIKE(SUBSTR(REGEXP_SUBSTR(X.OBSERVACAO, ':[^:](\S*)'),3,10), '^[[:digit:]]+$')
 
 SELECT * FROM CONSINCO.NAGV_PESSOAITWORKS_V2 Z WHERE NOT REGEXP_LIKE(IE_RG, '^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$') AND IE_RG NOT IN ('ISENTO','SEM_IE');
+
+-- Seleciona apenas numeros da string
+
+SELECT REGEXP_REPLACE('abc1c23c5c26c23c', '[^0-9]', '') AS only_numbers FROM dual;
