@@ -11,3 +11,7 @@ SELECT REGEXP_REPLACE('abc1c23c5c26c23c', '[^0-9]', '') AS only_numbers FROM dua
 -- Que contenha numeros
 
 REGEXP_LIKE(EMAIL, '[0-9]')
+
+-- Que começa com numeros
+
+REGEXP_LIKE(CAMPO, '^[0-9]') 
