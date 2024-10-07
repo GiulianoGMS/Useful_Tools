@@ -1,0 +1,56 @@
+-- Parametrização NFS-e | NDD e Consinco | Atual: 507
+
+JOB NDD
+ 
+> JOB: PD_NFSE_507_MIXTER_GUA_SP_07705530001407
+> JOBKEY: 1861
+> COLD: PD_NFSE_COLD_507_MIXTER_ATACAD_GUARULHOS_SP
+> USUARIO: NAGUMO_MASTER
+
+-- Parametrizar Software de Impressão na empresa 507:
+
+C5  - Parâmetros - Loja - Software Integração - NDDIGITAL NFe/NFSe:
+Incluir em Job NFSe o JOBKEY - 1861
+
+-- Pontos de Impressão
+
+C5 - Parâmetros - Parâmetros - Pontos de Imprssão
+Incluir Ponto de Emissão NFSe - Nome Imp - Nome Job (JOBKEY) e TIpo Job = NFSe
+
+-- Parâmetros da NFSe
+
+Configurar Série da Nota na Empresa (Parâmetros - Parâmetros - Empresa - Emissão NF)
+
+-- Configurações no Servidor NDD
+
+C:\Program Files\NDDigital\NFSe\e-Agente Service PD
+NDDigital.eForms.NFSe.DBAgent.exe
+Editar a linha atual e incluir o JOBKEY (Ou criar uma nova linha com a parametrização nova)
+Reiniciar o Agente NDDIGITAL NFSe Agente PD
+
+-- Obs:
+
+Os dados cadastrais da empresa 507 precisam estar corretos  no datacenter da NDD, enviados pelo formulário de configurações de NFS-e preenchido anteriormente
+
+-- Validando:
+
+Puxa as NFSe emitidas em processamento:
+
+SELECT X.SEQNF, X.SEQNOTAFISCAL, X.JOBNFESEG, X.STATUSNFE, X.*
+  FROM MLF_NOTAFISCAL X 
+ WHERE NROEMPRESA = 507 
+   AND X.SERIENF = 'NFS'
+   AND X.SEQNF IN (315336122,318897518) ;
+
+Passar ROWID e setar STATUSNFE para 99 (como erro) para poder reenviar
+
+Na 
+
+SELECT * 
+  FROM TBINPUTDOCUMENTS A 
+ WHERE A.SEQERP = 24190563
+ ORDER BY DTAHORINCLUSAO DESC;
+
+Passar o SEQNOTAFISCAL na SEQERP e obter o arquivo BLOB para validar se os campos enviados estão certos
+
+--
