@@ -1,6 +1,7 @@
 ALTER SESSION SET CURRENT_SCHEMA = CONSINCO;
 
 -- Altera status de 'A Analise Comercial' Para 'L Liberado', mas antes é preciso alterar para 'D Digitação' :)
+-- Pq se nao o Vinicios vai ter que entrar um a um
 
 BEGIN
   FOR t IN (SELECT DISTINCT E.NROPEDVENDA, E.NROEMPRESA
