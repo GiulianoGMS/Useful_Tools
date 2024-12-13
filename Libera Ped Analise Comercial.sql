@@ -18,7 +18,7 @@ BEGIN
                AND E.DTAINCLUSAO >= TRUNC(SYSDATE) - 30
                AND NVL((Z.QTDTRANSITO), 0) > 0
                AND E.SITUACAOPED = 'A'
-               AND E.NROEMPRESA = 502)
+               AND E.NROEMPRESA IN (502,503))
   LOOP
 
   UPDATE MAD_PEDVENDA D SET SITUACAOPED = 'D'
