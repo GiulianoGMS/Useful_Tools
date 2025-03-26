@@ -1,6 +1,6 @@
 -- Fiz CTE pra nao ter que ficar passando o texto 2x em cada select :)
 WITH cteText AS (SELECT UPPER(TRIM(
-                'IDFORNECEDOR' -- <<<< Texto a ser buscado nos objetos
+                'INSERT INTO MAC_GERCOMPRAITEM' -- <<<< Texto a ser buscado nos objetos
                 )) TEXTO 
                    FROM DUAL)
 
