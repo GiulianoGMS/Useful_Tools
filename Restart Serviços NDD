@@ -1,0 +1,11 @@
+# Script para reiniciar todos serviços da NDD
+# Rodar pelo PS como admin
+
+# Obtém todos os serviços cujo nome contenha "NDDigital"
+$servicosNDD = Get-Service | Where-Object { $_.Name -like "*NDDigital*" }
+
+# Reinicia cada um deles
+foreach ($servico in $servicosNDD) {
+    Write-Host "Reiniciando o serviço: $($servico.Name)"
+    Restart-Service -Name $servico.Name -Force
+}
