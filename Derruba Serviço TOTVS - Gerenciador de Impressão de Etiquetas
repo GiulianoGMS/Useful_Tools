@@ -1,0 +1,9 @@
+$svc = Get-WmiObject -Class Win32_Service | Where-Object { $_.DisplayName -like "*Gerenciador de Impressão de Etiquetas*" }
+ 
+if ($svc) {
+    Write-Output "Parando serviço $($svc.DisplayName) (PID: $($svc.ProcessId))..."
+    Stop-Process -Id $svc.ProcessId -Force
+    Write-Output "Processo finalizado com sucesso."
+} else {
+    Write-Output "Serviço não encontrado."
+}
