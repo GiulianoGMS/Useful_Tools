@@ -33,8 +33,7 @@ SELECT DISTINCT CATEGORIAN1, CATEGORIAN2, CATEGORIAN3, CATEGORIAN4, CATEGORIAN5
                   AND (CATEGORIAN3 = 'BEBIDA FRUTA'
                                                  AND CATEGORIAN4 =   'ADOCADA' AND CATEGORIAN5 = 'INDIVIDUAL'
                    OR  CATEGORIAN3 = 'REFRIGERANTE'
-                                                 AND(CATEGORIAN4 =   'LATA' AND CATEGORIAN5 = 'INDIVIDUAL'
-                                                  OR CATEGORIAN4 =   'PET'  AND CATEGORIAN5 = 'INDIVIDUAL'))
+                                                 AND CATEGORIAN4 IN ('LATA','PET')
+                   OR  CATEGORIAN3 = 'AGUA MINERAL')
                   
-ORDER BY 2;
-
+ORDER BY 1;
