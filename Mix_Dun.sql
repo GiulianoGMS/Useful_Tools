@@ -1,6 +1,7 @@
 /* Primeiro Loop para Ativar o "INDUTILVENDA' na MAP_PRODCODIGO */
-
 BEGIN
+  DECLARE vCount NUMBER := 0;
+  BEGIN
   FOR atv IN (
 SELECT A.SEQPRODUTO, C.QTDEMBALAGEM, C.CODACESSO, C.DATAHORAALTERACAO FROM NAGV_BASE_MIXDUN A INNER JOIN MAP_PRODCODIGO C ON C.SEQPRODUTO = A.SEQPRODUTO AND C.TIPCODIGO IN ('D','E') AND QTDEMBALAGEM > 1 AND NVL(C.INDUTILVENDA, 'N') != 'S'
            )
@@ -12,8 +13,11 @@ SELECT A.SEQPRODUTO, C.QTDEMBALAGEM, C.CODACESSO, C.DATAHORAALTERACAO FROM NAGV_
                             AND C.CODACESSO    = atv.CODACESSO
                             AND C.QTDEMBALAGEM = atv.QTDEMBALAGEM
                             AND C.TIPCODIGO IN ('E','D');
+                            vCount := vCount + 1;
   END LOOP;
+  DBMS_OUTPUT.put_line('Total Atualizado: '||vCount);
   
+  END;
 END;
 
 /* Segundo Loop para replicar o preço do unitário para a embalagem >1, ou alterar o status de venda para 'A' da embalagem > 1 */
@@ -46,6 +50,6 @@ SELECT DISTINCT B.STATUSVENDA STATUS_D, B1.STATUSVENDA STATUS_U,
     
 END;
 
-
+SELECT * FROM MAP_PRODCODIGO Z WHERE Z.USUARIOALTERACAO = 'MIX_DUN'
    
    
