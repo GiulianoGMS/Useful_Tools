@@ -1,7 +1,8 @@
 SELECT XI.VLRDESCONTO,
        XI.VLRDESCICMS,
        XI.VLRICMSST, 
-       XI.BASECALCICMSST, XI.ROWID -- <<< Tirar o valor de algum destes campos rs
+       XI.BASECALCICMSST, XI.ROWID -- <<< Tirar o valor de algum destes campos, dependendo do erro
+       -- (  https://validador.nfe.tecnospeed.com.br  ) << Ajuda a validar o erro
       
   FROM MFL_DFITEM XI INNER JOIN MFL_DOCTOFISCAL X ON X.SEQNF = XI.SEQNF
   
