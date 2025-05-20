@@ -1,0 +1,20 @@
+BEGIN
+  
+  FOR t IN (SELECT A.OWNER,
+                   REPLACE(A.DIRECTORY_NAME, '14', X.NROEMPRESA) DIRECTORY_NAME, 
+                   REPLACE(A.DIRECTORY_PATH, '14', X.NROEMPRESA) DIRECTORY_PATH, A.ORIGIN_CON_ID
+              FROM ALL_DIRECTORIES A INNER JOIN MAX_EMPRESA X ON 1=1 AND X.NROEMPRESA IN (59,60)
+             WHERE A.DIRECTORY_NAME LIKE '%LOJA014%' -- Base/Loja a ser replicada
+            )
+            
+ LOOP
+    BEGIN
+      EXECUTE IMMEDIATE 'CREATE OR REPLACE DIRECTORY "' || t.DIRECTORY_NAME || 
+                        '" AS ''' || t.DIRECTORY_PATH || '''';
+    EXCEPTION
+      WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao criar diretório ' || t.DIRECTORY_NAME || ': ' || SQLERRM);
+    END;
+ END LOOP;
+ 
+END;
