@@ -1,0 +1,1 @@
+ALTER USER Usuario IDENTIFIED BY MinhaSenhaNova123;
