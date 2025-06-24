@@ -44,6 +44,12 @@ BEGIN
   );
 END;
 
+-- Confere se executou com PATCH
+SELECT sql_id, sql_text, X..sql_patch
+  FROM v$sql X
+ WHERE sql_text LIKE '%Decode(Gv$session.Sid%'
+   AND ROWNUM <= 20;
+
 -- Dropar o PATCH, se for preciso
 BEGIN
   DBMS_SQLDIAG.DROP_SQL_PATCH(name => 'PATCH_NAG_GIULIANO');
