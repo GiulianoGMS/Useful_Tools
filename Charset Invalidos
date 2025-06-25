@@ -1,0 +1,5 @@
+-- Charset incorreto no PLSQL
+-- Criar variavel de ambiente com nome e valor:
+
+NLS_LANG
+.WE8MSWIN1252
