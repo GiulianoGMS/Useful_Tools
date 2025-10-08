@@ -15,3 +15,7 @@ REGEXP_LIKE(EMAIL, '[0-9]')
 -- Que começa com numeros
 
 REGEXP_LIKE(CAMPO, '^[0-9]') 
+
+-- APENAS numeros
+
+AND REGEXP_LIKE(X.CODACESSO, '^[0-9]+$')
