@@ -25,7 +25,7 @@ DECLARE
   v_patch_name VARCHAR2(100);
 BEGIN
   v_patch_name := DBMS_SQLDIAG.CREATE_SQL_PATCH(
-    --sql_id    => 'seu_sql_id_aqui', -- OU
+    --sql_id    => 'sql_id', -- OU
     sql_text    => '
 (SELECT max( bb.PRECOBASENORMAL)
  from map_produto aa,
