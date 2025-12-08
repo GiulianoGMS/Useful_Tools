@@ -13,13 +13,9 @@ SELECT SEQPALETECARREG, C.STATUSCARREG, ROWID
                                6205726,6201028,6200575,6203100,6203105,6202986,6204943,6203044,6204487,6200581,6202983,6204958,6204497, 6202863) -- Cod das Etiquetas  */
  ;
 
--- Se nao estiver seguir abaixo
--- Atualiza status da carga de S - Separaca opara L - Liberada para Faturamento
-SELECT NROEMPRESA, NROCARGA, STATUSCARGA, ROWID , T.*
-  FROM MRL_CARGAEXPED T WHERE NROCARGA IN (2156491, 2158122,2158126,2156491,2158091,2158359,2158660); 
-  
+-- Carga de Pulmao ou se passou da anterior e nao faturou  
 -- Neste caso, atualizar o pedido para L e faturar pelo venda balcao
-SELECT SITUACAOPED, X.* FROM MAD_PEDVENDA X WHERE NROPEDVENDA IN (9976499,9976510,9956157)
+SELECT SITUACAOPED, X.* FROM MAD_PEDVENDA X WHERE NROCARGA = -- Nro da Carga pra descobrir o nropedvenda
   UPDATE MAD_PEDVENDA D SET SITUACAOPED = 'L'
                       WHERE D.NROPEDVENDA = 9937668
                         AND D.NROEMPRESA =  507;
@@ -27,5 +23,10 @@ SELECT SITUACAOPED, X.* FROM MAD_PEDVENDA X WHERE NROPEDVENDA IN (9976499,997651
 -- Atualiza quantidade atendida = quantidade solicitada, pois estara = 0
 SELECT NROPEDVENDA, NROEMPRESA, SEQPRODUTO, QTDPEDIDA, QTDATENDIDA, STATUSITEM, ROWID FROM MAD_PEDVENDAITEM C 
  WHERE EXISTS (SELECT 1 FROM MAD_PEDVENDA P WHERE P.NROCARGA = 2158122 AND P.NROPEDVENDA = C.NROPEDVENDA);
+
+-- Se o CD quiser testar e refaturar (da ult vez nao deu certo rs)
+-- Atualiza status da carga de S - Separaca opara L - Liberada para Faturamento
+SELECT NROEMPRESA, NROCARGA, STATUSCARGA, ROWID , T.*
+  FROM MRL_CARGAEXPED T WHERE NROCARGA IN (2156491, 2158122,2158126,2156491,2158091,2158359,2158660); -- Nro da Carga
  
 
