@@ -1,3 +1,26 @@
+-- Para NFSE
+
+DECLARE 
+  vRowId VARCHAR2(100);
+
+BEGIN
+  SELECT MAX(Z.ROWID)
+    INTO vRowId
+      FROM MLF_NOTAFISCAL Z
+     WHERE NUMERONF = 662
+           AND NROEMPRESA = 507
+           AND CODGERALOPER = 11
+           AND SERIENF = '001';
+
+  PKG_MAD_FATURAMENTO.SP_GERA_MRL_TITULOFIN(vRowId , 'E', 'I');
+
+END;
+           
+-- Setar INDREPLICACAO = 'x'
+-- Setar INDEXPORTACAO = 'C'
+
+-- Executar Shdl CAFD_INTEG_TIT_FINANCEIRO
+
 -- Para Nota Fiscal
 DECLARE 
   vRowId VARCHAR2(100);
